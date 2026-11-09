@@ -327,11 +327,15 @@ The context used was: $context
     final inheritedElement = _inheritedElementOf<T>(context);
 
     if (listen) {
-      // bind context with the element
-      // We have to use this method instead of dependOnInheritedElement, because
-      // dependOnInheritedElement does not support relocating using GlobalKey
-      // if no provider were found previously.
-      context.dependOnInheritedWidgetOfExactType<_InheritedProviderScope<T?>>();
+      if (inheritedElement != null) {
+        // Reuse the element already found instead of doing another lookup.
+        context.dependOnInheritedElement(inheritedElement);
+      } else {
+        // A missing provider must still register a dependency, so relocating a
+        // GlobalKey below a matching provider causes the widget to rebuild.
+        context
+            .dependOnInheritedWidgetOfExactType<_InheritedProviderScope<T?>>();
+      }
     }
 
     final value = inheritedElement?.value;
