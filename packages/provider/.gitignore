@@ -1,1 +1,2 @@
-extension/devtools/build
+!extension/devtools/build/
+!extension/devtools/build/**
