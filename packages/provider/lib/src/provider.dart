@@ -333,8 +333,8 @@ The context used was: $context
       } else {
         // A missing provider must still register a dependency, so relocating a
         // GlobalKey below a matching provider causes the widget to rebuild.
-        context.dependOnInheritedWidgetOfExactType<
-            _InheritedProviderScope<T?>>();
+        context
+            .dependOnInheritedWidgetOfExactType<_InheritedProviderScope<T?>>();
       }
     }
 
