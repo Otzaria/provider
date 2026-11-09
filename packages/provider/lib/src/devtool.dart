@@ -74,7 +74,8 @@ class ProviderNode {
   /// Inspect an existing value without eagerly creating a lazy provider.
   ///
   /// Check [isInitialized] to distinguish an uninitialized value from null.
-  Object? get value => isInitialized ? _element._delegateState.value : null;
+  Object? get value =>
+      isInitialized ? _element._delegateState.debugValue : null;
 }
 
 @protected
@@ -89,7 +90,7 @@ class ProviderBinding {
   Map<String, ProviderNode> get providerDetails => _providerDetails;
   set providerDetails(Map<String, ProviderNode> value) {
     debugPostEvent('provider:provider_list_changed', <dynamic, dynamic>{});
-    _providerDetails = value;
+    _providerDetails = Map<String, ProviderNode>.of(value);
   }
 
   /// Register a mounted provider without copying the entire registry.
